@@ -1,6 +1,7 @@
 import asyncio
 import os
 import random
+import uuid
 
 import httpx
 from PIL import Image
@@ -82,14 +83,14 @@ async def async_download_image(client, url, filename):
                 image_file.write(chunk)
 
 
-async def download_backgrounds():
-    async with httpx.AsyncClient(follow_redirects=True) as client:
+async def download_backgrounds(size):
+    async with httpx.AsyncClient(follow_redirects=True,timeout=15) as client:
         tasks = [
             async_download_image(
                 client,
                 f"https://picsum.photos/{background_width}/{background_height}",
-                os.path.join(background_root_path, f"{i}.png")
-            ) for i in range(background_size)
+                os.path.join(background_root_path, f"{uuid.uuid4()}.png")
+            ) for i in range(size)
         ]
         await asyncio.gather(*tasks)
 
@@ -119,9 +120,9 @@ if __name__ == '__main__':
         os.makedirs(background_root_path)
 
     background_list = [os.path.join(background_root_path, f) for f in os.listdir(background_root_path)]
-    if len(background_list) == 0:
-        logger.info("background list is empty, start download background image")
-        asyncio.run(download_backgrounds())
+    if len(background_list) < background_size:
+        logger.info("start download background image")
+        asyncio.run(download_backgrounds(background_size - len(background_list)))
         background_list = [os.path.join(background_root_path, f) for f in os.listdir(background_root_path)]
 
     template_list = [os.path.join(template_root_path, f) for f in os.listdir(template_root_path)]
