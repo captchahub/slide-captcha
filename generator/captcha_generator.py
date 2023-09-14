@@ -30,8 +30,8 @@ def generate_captcha_image_v16(background_path, template_path):
     combined_height = max(background.height, cutout.height)
 
     combined_image = Image.new("RGBA", (combined_width, combined_height))
-    combined_image.paste(cutout, (0, random_y))
-    combined_image.paste(background, (cutout.width, 0))
+    combined_image.paste(background, (0, 0))
+    combined_image.paste(cutout, (0, random_y), cutout)
 
     return background, cutout, combined_image
 
@@ -43,7 +43,7 @@ def generate_captcha_image_v16(background_path, template_path):
 
 if __name__ == '__main__':
     background_path = "1.png"
-    fixed_template_path = "img.png"
+    fixed_template_path = "p.png"
     # active_template_path = "active.png"
     captcha_image, cutout,c = generate_captcha_image_v16(background_path, fixed_template_path)
     # captcha_image.show()
