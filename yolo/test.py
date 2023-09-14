@@ -1,5 +1,6 @@
 from pathlib import Path
 
+import torch
 from ultralytics import YOLO
 
 
@@ -10,4 +11,15 @@ def exort():
 
 
 if __name__ == '__main__':
-    exort()
+
+    def select_device():
+        if torch.cuda.is_available():
+            return 'cuda'
+        elif torch.backends.mps.is_available():
+            return 'mps'
+        else:
+            return 'cpu'
+
+
+    print(select_device())
+    # exort()

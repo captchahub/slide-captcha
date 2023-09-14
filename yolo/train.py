@@ -1,6 +1,16 @@
 from pathlib import Path
 
+import torch
 from ultralytics import YOLO
+
+
+def select_device():
+    if torch.cuda.is_available():
+        return 'cuda'
+    elif torch.backends.mps.is_available():
+        return 'mps'
+    else:
+        return 'cpu'
 
 
 def train():
@@ -12,7 +22,8 @@ def train():
     model = YOLO("yolov8n.pt")  # 加载预训练模型（建议用于训练）
 
     # 使用模型
-    model.train(data="data.yaml", epochs=50, device='mps')  # 训练模型
+    device = select_device()
+    model.train(data="data.yaml", epochs=50, device=device)  # 训练模型
     metrics = model.val()  # 在验证集上评估模型性能
     # results = model("https://ultralytics.com/images/bus.jpg")  # 对图像进行预测
     # success = model.export(format="onnx")  # 将模型导出为 ONNX 格式
