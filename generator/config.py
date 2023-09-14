@@ -7,12 +7,12 @@ background_root_path = "background"
 background_width = 300
 background_height = 200
 
-background_size = 50
+background_size = 300
 
 # yolo
 
 
-yolo_train_num = 800
+yolo_train_num = 3000
 yolo_valid_num = 50
 
 yolo_path = "../yolo"
