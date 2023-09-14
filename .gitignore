@@ -1,1 +1,9 @@
 .idea/
+generator/background
+
+yolo/train
+yolo/valid
+yolo/runs
+
+*.pt
+*.cache
