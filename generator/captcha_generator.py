@@ -1,5 +1,9 @@
+import os
+
 from PIL import Image, ImageDraw, ImageChops, ImageFilter
 import random
+
+from generator.config import template_root_path
 
 
 def random_int(low, high):
@@ -36,16 +40,20 @@ def generate_captcha_image_v16(background_path, template_path):
     return background, cutout, combined_image
 
 
-# Testing the function
+def get_random_template(path = template_root_path):
+    files = [os.path.join(path, f) for f in os.listdir(path)]
+    return random.choice(files)
 
 
-# Testing the functio
 
 if __name__ == '__main__':
     background_path = "1.png"
-    fixed_template_path = "p.png"
+    template_path = get_random_template()
     # active_template_path = "active.png"
-    captcha_image, cutout,c = generate_captcha_image_v16(background_path, fixed_template_path)
+    captcha_image, cutout,c = generate_captcha_image_v16(background_path, template_path)
     # captcha_image.show()
     # cutout.show()
     c.show()
+
+
+
