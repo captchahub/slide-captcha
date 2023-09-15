@@ -8,3 +8,5 @@ yolo/YOLOv8
 
 *.pt
 *.cache
+
+.ipynb_checkpoints

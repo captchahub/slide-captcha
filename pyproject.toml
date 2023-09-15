@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "slide-captcha"
+name = "slider-captcha"
 version = "0.1.0"
 description = ""
 authors = ["Your Name <you@example.com>"]
@@ -17,6 +17,9 @@ torchvision = "^0.15.2"
 torchaudio = "^2.0.2"
 onnx = "^1.14.1"
 
+
+[tool.poetry.group.dev.dependencies]
+jupyter = "^1.0.0"
 
 [build-system]
 requires = ["poetry-core"]
