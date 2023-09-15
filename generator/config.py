@@ -16,8 +16,8 @@ background_size = 300
 # yolo
 
 
-yolo_train_num = 3000
-yolo_valid_num = 100
+yolo_train_num = 6000
+yolo_valid_num = 200
 
 yolo_path = this_dir.joinpath("../yolo")
 
