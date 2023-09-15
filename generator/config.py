@@ -1,9 +1,13 @@
+from pathlib import Path
+
+this_dir = Path(__file__).parent
+
 # template
-template_root_path = "template"
+template_root_path = this_dir.joinpath("template")
 template_width = 60
 
 # background
-background_root_path = "background"
+background_root_path = this_dir.joinpath("background")
 background_width = 300
 background_height = 200
 
@@ -13,9 +17,9 @@ background_size = 300
 
 
 yolo_train_num = 3000
-yolo_valid_num = 50
+yolo_valid_num = 100
 
-yolo_path = "../yolo"
+yolo_path = this_dir.joinpath("../yolo")
 
 yolo_train_path = f"{yolo_path}/train"
 yolo_valid_path = f"{yolo_path}/valid"
