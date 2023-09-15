@@ -26,7 +26,7 @@ def train():
         model = YOLO("yolov8n.yaml")
         arg = {
             'data': 'data.yaml',
-            'epochs': 50,
+            'epochs': 100,
             'device': select_device(),
             'resume': True
         }
