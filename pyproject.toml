@@ -7,7 +7,6 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.9"
-pillow = "^10.0.0"
 httpx = "^0.25.0"
 loguru = "^0.7.2"
 ultralytics = "^8.0.178"
@@ -15,11 +14,11 @@ onnxruntime = "^1.15.1"
 torch = "^2.0.1"
 torchvision = "^0.15.2"
 torchaudio = "^2.0.2"
-onnx = "^1.14.1"
-
 
 [tool.poetry.group.dev.dependencies]
 jupyter = "^1.0.0"
+pillow = "^10.0.0"
+onnx = "^1.14.1"
 
 [build-system]
 requires = ["poetry-core"]
