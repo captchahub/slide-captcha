@@ -85,7 +85,7 @@ if __name__ == '__main__':
 
     output = output.transpose()
 
-    boxes = [row for row in [parse_row(row) for row in output] if row[5] > 0.5]
+    boxes = [row for row in [parse_row(row) for row in output] if row[5] > 0.1]
 
     boxes.sort(key=lambda x: x[5], reverse=True)
     result = []
