@@ -1,0 +1,35 @@
+name: Publish Python 🐍 distributions 📦 to PyPI
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+
+    - name: Install poetry
+      run: |
+        curl -sSL https://install.python-poetry.org | python3 -
+
+    - name: Configure poetry
+      run: |
+        poetry config pypi-token.pypi ${{ secrets.PYPI_TOKEN }}
+
+    - name: Build and Publish to PyPI
+      run: |
+        # Extract version from tag
+        VERSION=$(echo ${{ github.ref }} | sed 's/refs\/tags\/v//')
+        poetry version ${VERSION}
+        poetry build
+        poetry publish
+
