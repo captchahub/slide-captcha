@@ -1,1 +1,14 @@
 .idea/
+generator/background
+
+yolo/train
+yolo/valid
+yolo/runs
+yolo/YOLOv8
+
+*.pt
+*.cache
+
+.ipynb_checkpoints
+
+dist/
