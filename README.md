@@ -14,7 +14,8 @@
 ## 安装
 ```shell
 pip install captchahub-slide-captcha
-```·
+```
+
 ## 使用
 ```python
 from slide_captcha import slide_match
