@@ -7,8 +7,7 @@ from ultralytics import YOLO
 def select_device():
     if torch.cuda.is_available():
         return 'cuda'
-    elif torch.backends.mps.is_available():
-        return 'mps'
+
     else:
         return 'cpu'
 
@@ -23,12 +22,11 @@ def train():
             'resume': True
         }
     else:
-        model = YOLO("yolov8n.yaml")
+        model = YOLO("yolov8n.pt")
         arg = {
             'data': 'data.yaml',
-            'epochs': 100,
-            'device': select_device(),
-            'resume': True
+            'epochs': 3,
+            'device': select_device()
         }
 
     model.train(**arg)

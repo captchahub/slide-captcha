@@ -75,16 +75,24 @@ def download_image(url, filename):
                 image_file.write(chunk)
 
 
-async def async_download_image(client, url, filename):
-    async with client.stream("GET", url) as response:
-        response.raise_for_status()
-        with open(filename, 'wb') as image_file:
-            async for chunk in response.aiter_bytes():
-                image_file.write(chunk)
+
+async def async_download_image(client, url, path):
+    for attempt in range(5):  # 最多重试五次
+        try:
+            response = await client.get(url)
+            response.raise_for_status()  # 如果响应有问题（例如404或500），则抛出异常
+
+            with open(path, "wb") as file:
+                file.write(response.content)
+            return
+        except (httpx.ConnectTimeout, httpx.ReadTimeout, httpx.HTTPStatusError, httpx.RemoteProtocolError):
+            if attempt == 4:
+                raise
+            await asyncio.sleep(0.1 * (2 ** attempt))  # 指数退避
 
 
 async def download_backgrounds(size):
-    async with httpx.AsyncClient(follow_redirects=True,timeout=15) as client:
+    async with httpx.AsyncClient(follow_redirects=True, timeout=15) as client:
         tasks = [
             async_download_image(
                 client,
